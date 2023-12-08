@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Log Form</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 600px) {
+    form {
+        margin: 20px;
+    }
+}
+
+</style>
+<body>
+
+<h2>Attendance Log Form</h2>
+
+<form action="process_attendance_inputform.php" method="post" enctype="multipart/form-data">
+    <label for="emp_id">Employee ID:</label>
+    <input type="text" name="emp_id" required><br>
+
+    <label for="emp_name">Employee Name:</label>
+    <input type="text" name="emp_name" required><br>
+
+    <label for="atlog_date">Date:</label>
+    <input type="date" name="atlog_date" required><br>
+
+    <!-- Morning Log -->
+    <label for="am_in">AM In:</label>
+    <input type="text" name="am_in" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" title="Please enter a valid time (HH:MM:SS)" required>
+    <label for="am_in_cam">AM In Photo:</label>
+    <input type="file" name="am_in_cam" accept="image/*" required><br>
+
+    <label for="am_out">AM Out:</label>
+    <input type="text" name="am_out" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" title="Please enter a valid time (HH:MM:SS)" required>
+    <label for="am_out_cam">AM Out Photo:</label>
+    <input type="file" name="am_out_cam" accept="image/*" required><br>
+
+    <!-- Afternoon Log -->
+    <label for="pm_in">PM In:</label>
+    <input type="text" name="pm_in" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" title="Please enter a valid time (HH:MM:SS)" required>
+    <label for="pm_in_cam">PM In Photo:</label>
+    <input type="file" name="pm_in_cam" accept="image/*" required><br>
+
+    <label for="pm_out">PM Out:</label>
+    <input type="text" name="pm_out" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" title="Please enter a valid time (HH:MM:SS)" required>
+    <label for="pm_out_cam">PM Out Photo:</label>
+    <input type="file" name="pm_out_cam" accept="image/*" required><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+
+</body>
+</html>

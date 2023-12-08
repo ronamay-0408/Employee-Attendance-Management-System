@@ -1,0 +1,77 @@
+1. Create Database and Tables
+Database Name: eams
+Table:
+CREATE TABLE employeeinformation (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Code VARCHAR(20) NOT NULL,
+    Avatar BLOB,
+    FullName VARCHAR(255)NOT NULL,
+    Address VARCHAR(255),
+    PhoneNumber VARCHAR(15),
+    Email VARCHAR(100),
+    Sex VARCHAR(10),
+    DateOfBirth DATE,
+    PlaceOfBirth VARCHAR(100),
+    IDNumber VARCHAR(20),
+    EmployeePosition VARCHAR(50),
+    Department VARCHAR(50),
+    DateOfHire DATE,
+    EmployeeStatus VARCHAR(50)
+    primary key(Id)
+);
+
+create table atlog (
+    atlog_id integer not null auto_increment,
+    emp_id integer not null,
+    emp_name VARCHAR (255),
+    atlog_date date,
+    am_in_cam VARCHAR(500),
+    am_in time null,
+    am_out_cam VARCHAR(500),
+    am_out time null,
+    pm_in_cam VARCHAR(500),
+    pm_in time null,
+    pm_out_cam VARCHAR(500),
+    pm_out time null,
+    am_late time null,
+    am_undertime time null,
+    pm_late time null,
+    pm_undertime time null,
+    overtime time null,
+    PRIMARY KEY(atlog_id)
+);
+
+
+
+CREATE TABLE logreport (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(255) NOT NULL,
+    emp_id VARCHAR (20),
+    login_date DATE,
+    login_time TIME,
+    department VARCHAR(100),
+    email VARCHAR(255),
+    position VARCHAR(100),
+    status VARCHAR(50),
+    logout_date DATE,
+    logout_time TIME
+);
+
+
+2. using the Empform.html add an Employee ADMIN and Regular. Make sure to put ADMIN in the Department Column if the Employee is the ADMIN, any Depertment would do for the Regular Employee.
+
+3. After doing the Step 1 and 2, you can now start to manipulate the System, you can open two tabs one for ADMIN and one for REGULAR Employee.
+
+4. That is all, Enjoy!!!.
+
+
+
+Night Diff Rate = 20%
+Hourly Rate  = 150
+Total Hours of Overtime = 6
+
+Night Diff = 150 * 20% = 30
+	   = 30 * 6
+	   = 180 - 150
+	   = 30
+           

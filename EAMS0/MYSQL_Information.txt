@@ -1,0 +1,209 @@
+Database Name: eams
+Table:
+CREATE TABLE employeeinformation (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Code VARCHAR(20) NOT NULL,
+    Avatar BLOB,
+    FullName VARCHAR(255)NOT NULL,
+    Address VARCHAR(255),
+    PhoneNumber VARCHAR(15),
+    Email VARCHAR(100),
+    Sex VARCHAR(10),
+    DateOfBirth DATE,
+    PlaceOfBirth VARCHAR(100),
+    IDNumber VARCHAR(20),
+    EmployeePosition VARCHAR(50),
+    Department VARCHAR(50),
+    DateOfHire DATE,
+    EmployeeStatus VARCHAR(50)
+);
+
+Database Name: eams
+Table:
+CREATE TABLE admininformation (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Code VARCHAR(20) NOT NULL,
+    Avatar BLOB,
+    FullName VARCHAR(255)NOT NULL,
+    Address VARCHAR(255),
+    PhoneNumber VARCHAR(15),
+    Email VARCHAR(100),
+    Sex VARCHAR(10),
+    DateOfBirth DATE,
+    PlaceOfBirth VARCHAR(100),
+    IDNumber VARCHAR(20),
+    EmployeePosition VARCHAR(50),
+    Department VARCHAR(50),
+    DateOfHire DATE,
+    EmployeeStatus VARCHAR(50)
+);
+
+Table Name: empattendance
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+IDNumber VARCHAR(20),
+camera_upload VARCHAR (500),
+date timestamp
+
+
+CREATE TABLE emp_timein (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    IDNumber VARCHAR(20),
+    camera_upload VARCHAR(500),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    formatted_date_time VARCHAR(30) GENERATED ALWAYS AS (DATE_FORMAT(created_at, '%Y-%m-%d %h:%i:%s %p')) STORED
+);
+
+CREATE TABLE emp_timein (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    IDNumber VARCHAR(20),
+    camera_upload VARCHAR(500),
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    timein_period ENUM('AM', 'PM') DEFAULT NULL,
+    status ENUM('Present', 'Late', 'Absent') DEFAULT 'Absent'
+);
+
+CREATE TABLE timein (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    IDNumber VARCHAR(20),
+    camera_upload VARCHAR(500),
+    date DATE DEFAULT CURRENT_DATE,
+    timein_time TIME DEFAULT CURRENT_TIME,
+    timein_period ENUM('AM', 'PM') DEFAULT NULL,
+    status ENUM('Present', 'Late', 'Absent') DEFAULT 'Absent'
+);
+
+TimeIN_AM ()
+TimeOUT_AM ()
+TimeIN_PM ()
+TimeOUT_PM ()
+
+Timein = 8:00am to 11:50am
+
+
+id = 59
+IDNumber = ""	
+camera_upload = 1700754655.jpg
+date = 2023-11-23
+timein_time = 23:50:55
+timein_period = PM
+status = Late
+	
+18
+create table atlog (
+    atlog_id integer not null auto_increment,
+    emp_id integer not null,
+    atlog_date date,
+    am_in time null,
+    am_out time null,
+    pm_in time null,
+    pm_out time null,
+    am_late integer,
+    am_undertime integer,
+    pm_late integer,
+    pm_undertime integer,
+    primary key(atlog_id)
+);
+alter table atlog add constraint foreign key fk_atlog_employee (emp_id) references employee (emp_id);
+
+
+21:55:36
+
+Absent
+
+
+create table atlog2 (
+    atlog_id integer not null auto_increment,
+    emp_id integer not null,
+    emp_name VARCHAR (255),
+    atlog_date date,
+    am_in_cam VARCHAR(500),
+    am_in time null,
+    am_out_cam VARCHAR(500),
+    am_out time null,
+    pm_in_cam VARCHAR(500),
+    pm_in time null,
+    pm_out_cam VARCHAR(500),
+    pm_out time null,
+    am_late integer,
+    am_undertime integer,
+    pm_late integer,
+    pm_undertime integer,
+    primary key(atlog_id)
+);
+alter table atlog add constraint foreign key fk_atlog_employee (emp_id) references employee (emp_id);
+
+atlog_id = 24
+emp_id = 112233
+atlog_date = 2023-11-25
+am_in = 12:57:47
+am_out = 12:57:47
+pm_in = NULL
+pm_out = NULL
+am_late
+am_undertime = NULL
+pm_late = NULL
+pm_undertime = NULL
+
+
+Login Report
+CREATE TABLE logreport (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(255) NOT NULL,
+    login_date date,
+    login_time time,
+    department VARCHAR(100),
+    email VARCHAR(255),
+    position VARCHAR(100),
+    status VARCHAR(50),
+    logout_date DATE,
+    logout_time TIME
+);
+
+Fix the logout code (If needed) like it should check the IdNumber of the user who is currently login, and then executing the logout code. Because if you open two page and both login and try to logout the one, it logout the current user, which is wrong. It should logout the same IdNumber that login.
+
+Late Calculation = am_in time - 08:00:00 (Starting work time)
+
+why my pm_undertime value is like this 05:11:47, when in my database the pm_in value is 14:53:44
+and pm_out value is 16:41:57, if we do the calculation 
+pm_in : 14:53:44
+pm_out : 16:41:57
+semi_undertime =  16:41:57 - 14:53:44 = 01:48:13
+Scheduled hours: 4 hours
+pm_undertime = 4 hours - semi_undertime (01:48:13)  = 02:11:47. 
+SO, that means the value of pm_undertime should be  02:11:47 and not 05:11:47
+
+UNDERTIME FORMULA : pm_undertime = 04:00:00 - (22:59:35 - 22:59:01)
+
+AM_UNDERTIME & PM_UNDERTIME : $sql = "UPDATE atlog2 SET 
+        $pm_out_column = CURRENT_TIME, 
+        pm_out_cam = '$filename', 
+        pm_undertime = SEC_TO_TIME((4 * 3600) - TIME_TO_SEC(TIMEDIFF(pm_out, pm_in))) 
+        WHERE emp_id = '$employeeID' AND atlog_date = CURRENT_DATE";
+
+Employee Maintenance = Total Number of Employees
+Log-in Report = Total Number of Login Report
+Daily Attendance Report = Total Number of Daily Attendance Report
+Monthly Attendance Report = Total Number of Monthly Attendance Report (Example Total Number of Employee report for November)
+
+TOTAL HOURS (MONTH)
+Morning hours = 13:56:45 - 14:17:19
+Afternoon hours = 13:57:24 - 13:57:08
+Total hours = Morning hours + Afternoon hours
+
+CALCULATION OF TOTAL UNDERTIME (MONTH)
+UNDERTIME FORMULA : = 04:00:00 - (22:59:35 - 22:59:01)
+Total Undertime = am_undertime + pm_undertime
+
+Total Salary = Total Hours * 100
+
+
+ERROR 1: I seperated their condition by creating a new php file.
+
+ERROR 2: Fixing the Avatar
+
+ERROR 3: Fixing the time 
+
+ERROR 4: Fixing the am_late and pm_late
+
+

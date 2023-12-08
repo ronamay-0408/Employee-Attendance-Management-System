@@ -1,0 +1,108 @@
+Database Name: eams
+Table:
+CREATE TABLE employeeinformation (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Code VARCHAR(20) NOT NULL,
+    Avatar BLOB,
+    FullName VARCHAR(255)NOT NULL,
+    Address VARCHAR(255),
+    PhoneNumber VARCHAR(15),
+    Email VARCHAR(100),
+    Sex VARCHAR(10),
+    DateOfBirth DATE,
+    PlaceOfBirth VARCHAR(100),
+    IDNumber VARCHAR(20),
+    EmployeePosition VARCHAR(50),
+    Department VARCHAR(50),
+    DateOfHire DATE,
+    EmployeeStatus VARCHAR(50)
+);
+
+create table atlog (
+    atlog_id integer not null auto_increment,
+    emp_id integer not null,
+    emp_name VARCHAR (255),
+    atlog_date date,
+    am_in_cam VARCHAR(500),
+    am_in time null,
+    am_out_cam VARCHAR(500),
+    am_out time null,
+    pm_in_cam VARCHAR(500),
+    pm_in time null,
+    pm_out_cam VARCHAR(500),
+    pm_out time null,
+    am_late time null,
+    am_undertime time null,
+    pm_late time null,
+    pm_undertime time null,
+    primary key(atlog_id)
+);
+
+CREATE TABLE logreport (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(255) NOT NULL,
+
+    login_date date,
+    login_time time,
+    department VARCHAR(100),
+    email VARCHAR(255),
+    position VARCHAR(100),
+    status VARCHAR(50),
+    logout_date DATE,
+    logout_time TIME
+);
+
+
+
+CREATE TABLE atlog2 (
+    atlog_id INTEGER NOT NULL AUTO_INCREMENT,
+    emp_id INTEGER NOT NULL,
+    emp_name VARCHAR(255),
+    atlog_date DATE,
+    am_in_cam VARCHAR(500),
+    am_in TIME NULL,
+    am_out_cam VARCHAR(500),
+    am_out TIME NULL,
+    pm_in_cam VARCHAR(500),
+    pm_in TIME NULL,
+    pm_out_cam VARCHAR(500),
+    pm_out TIME NULL,
+    am_late TIME NULL,
+    am_undertime TIME NULL,
+    pm_late TIME NULL,
+    pm_undertime TIME NULL,
+    overtime TIME NULL,
+    PRIMARY KEY(atlog_id)
+);
+
+
+    overtime TIME NULL,
+    night_diff VARCHAR (10),
+    night_hours TIME NULL,
+
+    overtime TIME NULL, ------(Total hour of Overtime) (base on pm_out)
+    night_diff VARCHAR (10), -----(YES or NO)
+    night_hours TIME NULL,  -----(total time of Night Differential) (Multiply by 10% everyhour of time diff)
+
+
+Night Differential will be visible on PAYROLL part.
+
+total_hours_worked = 
+
+CALCULATION FOR OVERTIME
+overtime = (23:00:00 - 13:00:00) - 4 hours
+	 = 10:00:00 - 04:00:00
+	 = 06:00:00
+
+overtime = (23:00:00 - pm_in [13:00:00] ) - 4 hours
+ 	 = 10:00:00 - 04:00:00
+	 = 06:00:00
+
+CALCULATION FOR NIGHT HOURS
+nightdiff_rate = (pm_out - nightdiff_start)
+
+nightdiff_rate = (01:00:00 - 22:00:00)
+	       = 
+
+
+	= (pm_out -pm_in) - 4hours
